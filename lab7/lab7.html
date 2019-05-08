@@ -1,0 +1,74 @@
+<html lang="en">
+<head>
+<title>Chapter 10</title>
+<link rel="stylesheet" href="lab7.css">
+<script src="jquery-3.4.1.js"></script>
+<script>
+    $(document).ready(function(){
+        $(".small").each(function () {
+                $(this).click(function () {
+                        let src = $(this).attr("src").replace("small","medium");
+                        let name = $(this).attr("alt");
+                        let author = $(this).attr("title");
+                        let html = "<em>"+name+"</em><br>"+author;
+                        $("#large").attr("src",src);
+                        $("#intro").html(html);
+                    })
+            });
+        $(".sliders").each(function () {
+            $(this).change(function () {
+                let attribute = $(this).attr("id");
+                let value;
+                let css = $("#large").css("filter");
+                switch (attribute) {
+                    case "sliderGray": value = $(this).val()+"%"; css += " grayscale("+value+")"; break;
+                    case "sliderBrightness": value = $(this).val()+"%"; css += " brightness("+value+")"; break;
+                    case "sliderSaturation": value = $(this).val()+"%"; css += " saturate("+value+")"; break;
+                    case "sliderOpacity": value = $(this).val()+"%"; css+= " opacity("+value+")"; break;
+                    case "sliderHue": value = $(this).val()+"deg"; css+= " hue-rotate("+value+")"; break;
+                    case "sliderBlur": value = $(this).val()+"px"; css+= " blur("+value+")"; break;
+                }
+                $(this).next().html($(this).val());
+                $("#large").css("filter",css);
+                })
+        })
+    });
+
+</script>
+</head>    
+<body class="tiled">
+<header>
+    <h1>Art Filters</h1>
+</header>
+<main>
+    <div id="sliderBox">
+        <form>
+            <p><label>Opacity: </label><input type="range" id="sliderOpacity" min="0" max="100" value="100" class="sliders" /> <span id="numOpacity">100</span>%</p>
+            <p><label>Saturation: </label><input type="range" id="sliderSaturation" min="1" max="300" value="100" class="sliders"/> <span id="numSaturation">100</span>%</p>
+            <p><label>Brightness: </label><input type="range" id="sliderBrightness" min="0" max="300" value="100" class="sliders" /> <span id="numBrightness">100</span>%</p>
+            <p><label>Hue Rotate: </label><input type="range" id="sliderHue" min="0" max="360" value="0" class="sliders" /> <span id="numHue">0</span>deg</p>
+            <p><label>Grayscale: </label><input type="range" id="sliderGray" min="0" max="100" value="0" class="sliders"/> <span id="numGray">0</span>%</p>
+            <p><label>Blur: </label><input type="range" id="sliderBlur" min="0" max="10" value="0" class="sliders" /> <span id="numBlur">0</span>px</p>
+            <p><button id="resetFilters">Reset</button> </p>
+        </form>    
+    </div>
+    <figure id="imgManipulated">
+        <img src="images/medium/painting1.jpg" alt="" id="large" style="filter:opacity(100%) saturate(100%) brightness(100%) hue-rotate(0deg) grayscale(0%) blur(0px)">
+        <figcaption id="intro">
+            <em>Still Life with Flowers in a Glass Vase</em> <br>
+            Jan Davidsz. de Heem, 1650 - 1683
+        </figcaption>
+    </figure>   
+    <div id="thumbBox">
+        <div><img src="images/small/painting1.jpg"  alt="Still Life with Flowers in a Glass Vase" title="Jan Davidsz. de Heem, 1650 - 1683" class="small"/></div>
+        <div><img src="images/small/painting2.jpg"  alt="Portrait of Alida Christina Assink" title="Jan Adam Kruseman, 1833" class="small"/></div>
+        <div><img src="images/small/painting3.jpg"  alt="Self-portrait" title="Vincent van Gogh, 1887" class="small"/></div>
+        <div><img src="images/small/painting4.jpg"  alt="William II, Prince of Orange, and his Bride, Mary Stuart" title="Anthony van Dyck, 1641" class="small"/></div>
+        <div><img src="images/small/painting5.jpg"  alt="Milkmaid" title="Johannes Vermeer, c. 1660" class="small"/></div>
+    </div>
+</main>
+<script>
+
+</script>    
+</body>   
+</html>
